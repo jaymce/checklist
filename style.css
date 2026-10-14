@@ -1,0 +1,199 @@
+/* Custom properties ("CSS variables"). Defined once, used everywhere —
+   so changing a color here changes it across the whole page. */
+:root {
+  --bg: #f6f7f9;
+  --surface: #ffffff;
+  --border: #e3e5e9;
+  --text: #1b1d21;
+  --text-dim: #6a6f78;
+  --accent: #2f6fed;
+  --accent-text: #ffffff;
+  --danger: #c2374a;
+  --radius: 10px;
+  --shadow: 0 1px 2px rgba(16, 18, 22, 0.06), 0 8px 24px rgba(16, 18, 22, 0.06);
+}
+
+/* Same variables, re-pointed for anyone whose system is set to dark mode. */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #15171a;
+    --surface: #1e2126;
+    --border: #2e3238;
+    --text: #e9eaec;
+    --text-dim: #9aa0a9;
+    --accent: #5b8ff9;
+    --accent-text: #0f1114;
+    --danger: #e8707f;
+    --shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 8px 24px rgba(0, 0, 0, 0.25);
+  }
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 2rem 1rem 4rem;
+  background: var(--bg);
+  color: var(--text);
+  font: 16px/1.5 -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+.app {
+  max-width: 34rem;
+  margin: 0 auto;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 1.75rem;
+}
+
+.app-header h1 {
+  margin: 0;
+  font-size: 1.4rem;
+  letter-spacing: -0.01em;
+}
+
+.progress {
+  margin: 0.35rem 0 0;
+  color: var(--text-dim);
+  font-size: 0.875rem;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---- add row ---- */
+
+.add-row {
+  display: flex;
+  gap: 0.5rem;
+  margin: 1.5rem 0 1rem;
+}
+
+.add-row input {
+  flex: 1;
+  min-width: 0;
+  padding: 0.7rem 0.85rem;
+  font-size: 1rem;
+  color: var(--text);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+.add-row input:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.add-row button {
+  padding: 0.7rem 1.15rem;
+  font-size: 0.95rem;
+  font-weight: 550;
+  color: var(--accent-text);
+  background: var(--accent);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.add-row button:hover { filter: brightness(1.08); }
+
+/* ---- list ---- */
+
+.items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.7rem 0.25rem;
+  border-top: 1px solid var(--border);
+}
+
+.item:first-child { border-top: none; }
+
+.item input[type="checkbox"] {
+  flex: none;
+  width: 1.15rem;
+  height: 1.15rem;
+  accent-color: var(--accent);
+  cursor: pointer;
+}
+
+.item-text {
+  flex: 1;
+  min-width: 0;
+  overflow-wrap: anywhere;
+  cursor: pointer;
+}
+
+/* The visual payoff of checking something off. */
+.item.done .item-text {
+  color: var(--text-dim);
+  text-decoration: line-through;
+}
+
+.delete {
+  flex: none;
+  padding: 0.25rem 0.4rem;
+  font-size: 1.05rem;
+  line-height: 1;
+  color: var(--text-dim);
+  background: none;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.12s ease;
+}
+
+.item:hover .delete,
+.delete:focus-visible {
+  opacity: 1;
+}
+
+.delete:hover { color: var(--danger); }
+
+/* Touch devices have no hover, so never hide the delete button there. */
+@media (hover: none) {
+  .delete { opacity: 1; }
+}
+
+/* ---- empty state + footer ---- */
+
+.empty {
+  margin: 1.5rem 0;
+  color: var(--text-dim);
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.empty[hidden] { display: none; }
+
+.app-footer {
+  margin-top: 1.25rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+  text-align: right;
+}
+
+.app-footer[hidden] { display: none; }
+
+.link-button {
+  padding: 0;
+  font-size: 0.85rem;
+  color: var(--text-dim);
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.link-button:hover { color: var(--text); }

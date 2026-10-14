@@ -1,0 +1,10 @@
+# macOS clutter — Finder drops these into every folder it opens.
+.DS_Store
+.AppleDouble
+
+# Editor settings
+.vscode/
+.idea/
+
+# Dependencies (not used yet, but standard to ignore)
+node_modules/

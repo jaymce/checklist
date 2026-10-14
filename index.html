@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>My Checklist</title>
+  <meta name="description" content="A simple checklist that saves itself in your browser.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="app">
+    <header class="app-header">
+      <h1>My Checklist</h1>
+      <p class="progress" id="progress">Nothing here yet</p>
+    </header>
+
+    <!-- A <form> means the Enter key submits for free, with no extra JavaScript. -->
+    <form class="add-row" id="add-form">
+      <input
+        type="text"
+        id="new-item"
+        placeholder="What needs doing?"
+        autocomplete="off"
+        maxlength="200"
+        aria-label="New checklist item">
+      <button type="submit">Add</button>
+    </form>
+
+    <ul class="items" id="items"></ul>
+
+    <p class="empty" id="empty">
+      Your list is empty. Add something above to get started.
+    </p>
+
+    <footer class="app-footer">
+      <button type="button" id="clear-done" class="link-button">Clear completed</button>
+    </footer>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
