@@ -4,39 +4,88 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>My Checklist 2</title>
-  <meta name="description" content="A simple checklist that saves itself in your browser.">
+  <meta name="description" content="A checklist with your own private, cross-device list.">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <main class="app">
-    <header class="app-header">
+
+  <!-- Shown only until we know whether a session already exists, so the
+       login screen never flashes for someone who's already signed in. -->
+  <p class="loading" id="loading-screen">Loading&hellip;</p>
+
+  <!-- Logged OUT view -->
+  <div class="auth-screen" id="auth-screen" hidden>
+    <div class="auth-card">
       <h1>My Checklist</h1>
-      <p class="progress" id="progress">Nothing here yet</p>
-    </header>
+      <p class="auth-subtitle">Sign in to see your list</p>
 
-    <!-- A <form> means the Enter key submits for free, with no extra JavaScript. -->
-    <form class="add-row" id="add-form">
-      <input
-        type="text"
-        id="new-item"
-        placeholder="What needs doing?"
-        autocomplete="off"
-        maxlength="200"
-        aria-label="New checklist item">
-      <button type="submit">Add</button>
-    </form>
+      <form id="auth-form">
+        <input
+          type="email"
+          id="auth-email"
+          placeholder="Email"
+          autocomplete="email"
+          required>
+        <input
+          type="password"
+          id="auth-password"
+          placeholder="Password"
+          autocomplete="current-password"
+          minlength="6"
+          required>
+        <button type="submit" id="auth-submit">Sign in</button>
+      </form>
 
-    <ul class="items" id="items"></ul>
+      <p class="auth-toggle">
+        <span id="auth-toggle-text">Don&rsquo;t have an account?</span>
+        <button type="button" id="auth-toggle-mode" class="link-button">Sign up</button>
+      </p>
 
-    <p class="empty" id="empty">
-      Your list is empty. Add something above to get started.
-    </p>
+      <!-- aria-live so screen readers announce errors/success without
+           needing focus to move there. -->
+      <p class="auth-message" id="auth-message" aria-live="polite"></p>
+    </div>
+  </div>
 
-    <footer class="app-footer">
-      <button type="button" id="clear-done" class="link-button">Clear completed</button>
-    </footer>
-  </main>
+  <!-- Logged IN view -->
+  <div id="app-screen" hidden>
+    <main class="app">
+      <header class="app-header">
+        <div class="header-row">
+          <h1>My Checklist</h1>
+          <div class="header-account">
+            <span class="user-email" id="user-email"></span>
+            <button type="button" id="sign-out" class="link-button">Sign out</button>
+          </div>
+        </div>
+        <p class="progress" id="progress">Nothing here yet</p>
+      </header>
 
-  <script src="app.js"></script>
+      <form class="add-row" id="add-form">
+        <input
+          type="text"
+          id="new-item"
+          placeholder="What needs doing?"
+          autocomplete="off"
+          maxlength="200"
+          aria-label="New checklist item">
+        <button type="submit">Add</button>
+      </form>
+
+      <ul class="items" id="items"></ul>
+
+      <p class="empty" id="empty">
+        Your list is empty. Add something above to get started.
+      </p>
+
+      <footer class="app-footer">
+        <button type="button" id="clear-done" class="link-button">Clear completed</button>
+      </footer>
+    </main>
+  </div>
+
+  <!-- type="module" lets app.js use `import`, and defers it automatically
+       until the HTML above has parsed, so the elements it looks up exist. -->
+  <script type="module" src="app.js"></script>
 </body>
 </html>

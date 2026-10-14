@@ -55,6 +55,29 @@ body {
   letter-spacing: -0.01em;
 }
 
+.header-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.header-account {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  flex-shrink: 0;
+}
+
+.user-email {
+  color: var(--text-dim);
+  font-size: 0.8rem;
+  max-width: 12rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .progress {
   margin: 0.35rem 0 0;
   color: var(--text-dim);
@@ -197,3 +220,87 @@ button:focus-visible {
 }
 
 .link-button:hover { color: var(--text); }
+
+/* ---- loading + auth screens ---- */
+
+.loading {
+  margin: 4rem auto;
+  color: var(--text-dim);
+  text-align: center;
+}
+
+.auth-screen {
+  display: flex;
+  min-height: 80vh;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.auth-card {
+  width: 100%;
+  max-width: 22rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 2rem 1.75rem;
+  text-align: center;
+}
+
+.auth-card h1 {
+  margin: 0 0 0.35rem;
+  font-size: 1.4rem;
+  letter-spacing: -0.01em;
+}
+
+.auth-subtitle {
+  margin: 0 0 1.5rem;
+  color: var(--text-dim);
+  font-size: 0.9rem;
+}
+
+#auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+#auth-form input {
+  padding: 0.7rem 0.85rem;
+  font-size: 1rem;
+  color: var(--text);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+
+#auth-form button {
+  margin-top: 0.3rem;
+  padding: 0.7rem 1.15rem;
+  font-size: 0.95rem;
+  font-weight: 550;
+  color: var(--accent-text);
+  background: var(--accent);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+#auth-form button:hover { filter: brightness(1.08); }
+#auth-form button:disabled { opacity: 0.6; cursor: default; }
+
+.auth-toggle {
+  margin: 1.1rem 0 0;
+  font-size: 0.85rem;
+  color: var(--text-dim);
+}
+
+.auth-message {
+  min-height: 1.2em;
+  margin: 0.9rem 0 0;
+  font-size: 0.85rem;
+  color: var(--text-dim);
+}
+
+.auth-message-error { color: var(--danger); }
